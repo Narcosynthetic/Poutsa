@@ -92,9 +92,10 @@ public class SecondActivity extends FragmentActivity implements SensorEventListe
             public void onClick(View view) {
                 String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Hole");
+                
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference(userid);
                 GeoFire geoFire = new  GeoFire(ref);
-                geoFire.setLocation(userid, new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+                geoFire.setLocation(userid+"-"+System.currentTimeMillis(), new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
 
 
                 setHole = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
